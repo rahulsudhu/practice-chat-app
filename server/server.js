@@ -6,15 +6,27 @@
 
 
 const path = require('path');
-const express = require('express');
+const express = require('express'); 
+ const http = require('http');
+const socketio = require('socket.io');
 
 var publicPath = path.join(__dirname, '../html');
 const port = process.env.PORT || 3000;
 var app = express();
+var server = app.listen(port);
+var io = socketio.listen(server);
 
 app.use(express.static(publicPath));
 
-
-app.listen(port, () => {
-    console.log(`Started on ${port}`);
+io.on('connection', (socket) => {
+    console.log('New user connected');
+    
+    socket.on('disconnect', () => {
+        console.log('User disconnected');
+    });
 });
+
+
+
+
+
