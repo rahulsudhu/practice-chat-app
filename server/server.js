@@ -14,7 +14,7 @@ var publicPath = path.join(__dirname, '../html');
 const port = process.env.PORT || 3000;
 var app = express();
 var server = app.listen(port, ()=> {
-    console.log('Server started on ', port)
+    console.log('Server started on ', port);
 });
 var io = socketio.listen(server);
 
@@ -22,6 +22,10 @@ app.use(express.static(publicPath));
 
 io.on('connection', (socket) => {
     console.log('New user connected');
+    socket.broadcast.emit('newMessage', {
+        from: 'Rahul',
+        text: 'joined'
+    });
     
     socket.on('createMessage', (message)=> {
         message.createdAt = new Date().getTime();
