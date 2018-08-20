@@ -15,8 +15,8 @@ socket.on('disconnect', function ()  {
     });
 
 socket.emit('createMessage', {
-    from: 'Mr butt',
-    text: 'Satan lives'
+    from: 'New User',
+    text: 'Hello Guys'
 });
 
 socket.on('newMessage', function (message) {

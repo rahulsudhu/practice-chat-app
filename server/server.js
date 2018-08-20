@@ -23,8 +23,12 @@ app.use(express.static(publicPath));
 io.on('connection', (socket) => {
     console.log('New user connected');
     socket.broadcast.emit('newMessage', {
-        from: 'Rahul',
-        text: 'joined'
+        from: 'Admin',
+        text: 'New user joined'
+    });
+    socket.emit('newMessage', {
+        from: 'Admin',
+        text: 'Welcome to the Chat App'
     });
     
     socket.on('createMessage', (message)=> {
